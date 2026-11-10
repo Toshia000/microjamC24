@@ -1,0 +1,40 @@
+#pragma once
+
+namespace gam {
+  class gam_grid {
+    public:
+      /**
+       * Grid for battleships game
+       * 
+       * @param columns number of grid columns
+       * @param rows number of grid rows
+       */
+      gam_grid(int columns, int rows);
+
+      /**
+       * Creates a new ship with random placement and orientation
+       * 
+       * @param size number of grid areas ship occupies
+       */
+      void new_ship(int size);
+
+      /**
+       * @return number of ships that are not sunk
+       */
+      int ships_left();
+
+      /**
+       * @return number of grid columns
+       */
+      int columns();
+
+      /**
+       * @return number of grid rows
+       */
+      int rows();
+
+    private:
+      int grid_columns;
+      int grid_rows;
+  };
+}
