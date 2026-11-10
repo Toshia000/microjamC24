@@ -1,4 +1,19 @@
 #include "gam_battleships.h"
+#include "mj/mj_game_list.h"
+
+namespace {
+    constexpr bn::string_view code_credits[] = {"Garrett Fiorito", "Samuel Hyrych Zherzdyev"};
+    constexpr bn::string_view graphics_credits[] = {"Garrett Fiorito", "Samuel Hyrych Zherzdyev"};
+    constexpr bn::string_view sfx_credits[] = {"Garrett Fiorito", "Samuel Hyrych Zherzdyev"};
+    constexpr bn::string_view music_credits[] = {"Garrett Fiorito", "Samuel Hyrych Zherzdyev"};
+}
+
+MJ_GAME_LIST_ADD(gam::gam_battleships)
+
+MJ_GAME_LIST_ADD_CODE_CREDITS(code_credits)
+MJ_GAME_LIST_ADD_GRAPHICS_CREDITS(graphics_credits)
+MJ_GAME_LIST_ADD_MUSIC_CREDITS(music_credits)
+MJ_GAME_LIST_ADD_SFX_CREDITS(sfx_credits)
 
 namespace gam {
 
