@@ -31,8 +31,15 @@ namespace gam {
       /**
        * @return number of ships that are not sunk
        */
-      int gam_grid::ships_left() {
-        return 0; // Placeholder for now
+      int gam_grid::ships_left() const {
+        int ships_remaining = 0;
+
+        for (const gam_ship& ship : ships) {
+          if(!ship.is_hit()) {
+            ships_remaining++;
+          }
+        }
+        return ships_remaining;
       }
 
       /**

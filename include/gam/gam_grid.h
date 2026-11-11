@@ -27,8 +27,7 @@ namespace gam {
       /**
        * @return number of ships that are not sunk
        */
-      int ships_left();
-
+      int ships_left() const;
       /**
        * @return number of grid columns
        */

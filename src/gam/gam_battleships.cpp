@@ -91,7 +91,7 @@ namespace gam {
    * In this particular microgame the player wins if all ships are destroyed.
    */
   bool gam_battleships::victory() const {
-      return false;
+      return game_grid.ships_left() == 0;
   }
 
   /**
