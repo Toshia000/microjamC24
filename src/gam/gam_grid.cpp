@@ -18,7 +18,14 @@ namespace gam {
        * @param size number of grid areas ship occupies
        */
       void gam_grid::new_ship(int size) {
-
+        if (ships.size() < MAX_SHIPS) {
+          ships.push_back(
+            gam::gam_ship(size,
+            random.get_bool(),
+            random.get_int(columns()),
+            random.get_int(rows()))
+          );
+        }
       }
 
       /**

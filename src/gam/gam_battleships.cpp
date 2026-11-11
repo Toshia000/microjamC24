@@ -31,9 +31,12 @@ namespace gam {
     [[maybe_unused]] const mj::game_data& data) : 
     mj::game("gam"),
     game_grid(5, 5),
-    game_selector(0,0),
+    game_selector(0, 0),
     game_background(bn::regular_bg_items::grid.create_bg(0, 0))
   {
+    game_grid.new_ship(2);
+    game_grid.new_ship(3);
+    game_grid.new_ship(4);
   }
 
   /**

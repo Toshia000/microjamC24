@@ -1,4 +1,9 @@
 #pragma once
+#include <bn_vector.h>
+#include <bn_random.h>
+#include "gam_ship.h"
+
+const int MAX_SHIPS = 3;
 
 namespace gam {
   class gam_grid {
@@ -36,5 +41,7 @@ namespace gam {
     private:
       int grid_columns;
       int grid_rows;
+      bn::vector<gam::gam_ship, MAX_SHIPS> ships;
+      bn::random random;
   };
 }
