@@ -21,7 +21,9 @@ namespace gam {
             /**
              * Returns true if this ship is sunk/hit
             */
-            bool is_hit();
+            bool is_hit() const;
+
+            bool try_to_hit(int column, int row);
 
             /**
              * @param size number of grid areas ship occupies
@@ -46,6 +48,7 @@ namespace gam {
         private:
           int ship_size;
           bool ship_horizontal;
+          bool ship_hit = false;
           bn::vector<int, MAX_SIZE> ship_x_coords;
           bn::vector<int, MAX_SIZE> ship_y_coords;
           bn::vector<bn::sprite_ptr, MAX_SIZE> ship_sprites;

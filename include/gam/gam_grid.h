@@ -3,9 +3,10 @@
 #include <bn_random.h>
 #include "gam_ship.h"
 
-const int MAX_SHIPS = 3;
-
 namespace gam {
+
+  const int MAX_SHIPS = 3;
+
   class gam_grid {
     public:
       /**

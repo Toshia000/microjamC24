@@ -75,7 +75,7 @@ namespace gam {
     /**
      * @return true if the ship has been hit. False if not
     */
-    bool gam_ship::is_hit() {
-        return false; 
+    bool gam_ship::is_hit() const {
+        return ship_hit; 
     }
 }
