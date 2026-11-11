@@ -39,16 +39,6 @@ namespace gam {
 
     selector_sprite.set_position(-48 + grid_column * 24, -48 + grid_row * 24);
 
-    if(bn::keypad::a_pressed()) {
-      fire();
-    }
-  }
-
-  /**
-   * Fires at ship at selector's location
-   */
-  void gam_selector::fire() {
-
   }
 
   /**

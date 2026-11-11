@@ -39,6 +39,8 @@ namespace gam {
        */
       int rows();
 
+      void fire(int column, int row);
+
     private:
       int grid_columns;
       int grid_rows;

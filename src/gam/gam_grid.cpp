@@ -48,4 +48,11 @@ namespace gam {
       int gam_grid::rows() {
         return grid_rows;
       }
+
+
+      void gam_grid::fire(int column, int row) {
+        for (gam_ship& ship : ships) {
+          ship.try_to_hit(column, row);
+        }
+      }
     }

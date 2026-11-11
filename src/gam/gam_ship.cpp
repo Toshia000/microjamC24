@@ -78,4 +78,39 @@ namespace gam {
     bool gam_ship::is_hit() const {
         return ship_hit; 
     }
+
+    bool gam_ship::try_to_hit(int column, int row) {
+        if(ship_hit) {
+            return false;
+        }
+
+        for (int i = 0; i < ship_size; i++) {
+
+            int filled_column;
+            int filled_row;
+
+            if(ship_horizontal) {
+                // Row stays the same and column changes
+                filled_column = ship_x_coords[i]; 
+                filled_row = ship_y_coords[0];
+            }
+            else {
+                // Column stays the same while row changes (vertical)
+                filled_column = ship_x_coords[0];
+                filled_row = ship_y_coords[i]; 
+            }
+
+            if(column == filled_column && row == filled_row) { // If the ship is hit ..
+                ship_hit = true;
+
+                for (bn::sprite_ptr& sprite : ship_sprites) {
+                    sprite.set_visible(false); // Hides the current square
+                }
+
+                return true; // Ship was hit so return true
+            }
+        }
+
+        return false; // Missed so return false
+    }
 }

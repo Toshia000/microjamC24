@@ -1,6 +1,7 @@
 #include "gam_battleships.h"
 #include "mj/mj_game_list.h"
 #include "bn_regular_bg_items_grid.h"
+#include "bn_keypad.h"
 
 namespace {
     constexpr bn::string_view code_credits[] = {"Garrett Fiorito", "Samuel Hyrych Zherzdyev"};
@@ -75,6 +76,10 @@ namespace gam {
       // The title is not hidden early (false is passed), so the title disappears at the default time
 
       game_selector.update(game_grid.columns(), game_grid.rows());
+
+      if(bn::keypad::a_pressed()) {
+        game_grid.fire(game_selector.column(), game_selector.row());
+      }
 
       mj::game_result result(victory(), false);
       return result;

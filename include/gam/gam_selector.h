@@ -18,11 +18,6 @@ namespace gam {
       void update(int columns, int rows);
 
       /**
-       * Fires at ship at selector's location
-       */
-      void fire();
-
-      /**
        * @return selector's column position on the grid
        */
       int column();
