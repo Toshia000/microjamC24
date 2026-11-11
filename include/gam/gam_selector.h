@@ -1,4 +1,5 @@
 #pragma once
+#include "bn_sprite_ptr.h"
 
 namespace gam {
   class gam_selector {
@@ -14,7 +15,7 @@ namespace gam {
       /**
        * Checks player's input for movement and fire
        */
-      void update();
+      void update(int columns, int rows);
 
       /**
        * Fires at ship at selector's location
@@ -34,5 +35,6 @@ namespace gam {
     private:
       int grid_column;
       int grid_row;
+      bn::sprite_ptr selector_sprite;
   };
 }
