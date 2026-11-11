@@ -1,6 +1,9 @@
 #pragma once
 
 #include "mj/mj_game.h"
+#include "bn_regular_bg_ptr.h"
+#include "gam_grid.h"
+#include "gam_selector.h"
 
 namespace gam 
 {
@@ -51,5 +54,8 @@ class gam_battleships : public mj::game
 
 
     private:
+    gam_grid game_grid;
+    gam_selector game_selector;
+    bn::regular_bg_ptr game_background;
     };
 }

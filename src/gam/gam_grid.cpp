@@ -25,7 +25,7 @@ namespace gam {
        * @return number of ships that are not sunk
        */
       int gam_grid::ships_left() {
-
+        return 0; // Placeholder for now
       }
 
       /**

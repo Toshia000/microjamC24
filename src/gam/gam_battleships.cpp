@@ -1,5 +1,6 @@
 #include "gam_battleships.h"
 #include "mj/mj_game_list.h"
+#include "bn_regular_bg_items_grid.h"
 
 namespace {
     constexpr bn::string_view code_credits[] = {"Garrett Fiorito", "Samuel Hyrych Zherzdyev"};
@@ -25,8 +26,14 @@ namespace gam {
    * @param completed_games how many microgames the player has completed so far
    * @param data shared information, such as a rng and number of frames left in the microgame
    */
-  gam_battleships::gam_battleships([[maybe_unused]] int completed_games, [[maybe_unused]] const mj::game_data& data) : mj::game("gam") {
-
+  gam_battleships::gam_battleships(
+    [[maybe_unused]] int completed_games, 
+    [[maybe_unused]] const mj::game_data& data) : 
+    mj::game("gam"),
+    game_grid(5, 5),
+    game_selector(0,0),
+    game_background(bn::regular_bg_items::grid.create_bg(0, 0))
+  {
   }
 
   /**
@@ -63,6 +70,9 @@ namespace gam {
       // Creates a game result indicating whether the game is finished and whether the title should be hidden early
       // For this game the game should end early if the player has won (if victory returns true)
       // The title is not hidden early (false is passed), so the title disappears at the default time
+
+      game_selector.update();
+
       mj::game_result result(victory(), false);
       return result;
   }
