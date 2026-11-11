@@ -13,7 +13,7 @@ namespace gam {
   grid_column(start_column), 
   grid_row(start_row),
   selector_sprite(bn::sprite_items::player.create_sprite(
-    -48 + start_column *24,
+    -48 + start_column * 24,
     -48 + start_row * 24))
   
   {
@@ -27,13 +27,13 @@ namespace gam {
     if (bn::keypad::left_pressed() && grid_column > 0) {
       grid_column--;
     }
-    if (bn::keypad::right_pressed() && grid_column < columns -1) {
+    if (bn::keypad::right_pressed() && grid_column < (columns -1)) {
       grid_column++;
     }
     if (bn::keypad::up_pressed() && grid_row > 0) {
       grid_row--;
     }
-    else if (bn::keypad::down_pressed() && grid_row < rows - 1) {
+    if (bn::keypad::down_pressed() && grid_row < rows - 1) {
       grid_row++;
     }
 
