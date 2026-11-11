@@ -9,12 +9,12 @@ namespace gam {
    * @param grid_column selector's column position on the grid
    * @param grid_row selector's row position on the grid
    */
-  gam_selector::gam_selector(int grid_column, int grid_row) : 
-  grid_column(grid_column), 
-  grid_row(grid_row),
+  gam_selector::gam_selector(int start_column, int start_row) : 
+  grid_column(start_column), 
+  grid_row(start_row),
   selector_sprite(bn::sprite_items::player.create_sprite(
-    -48 + grid_column *24,
-    -48 + grid_row * 24))
+    -48 + start_column *24,
+    -48 + start_row * 24))
   
   {
     selector_sprite.set_scale(0.5);

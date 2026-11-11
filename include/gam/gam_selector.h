@@ -10,7 +10,7 @@ namespace gam {
        * @param grid_column selector's column position on the grid
        * @param grid_row selector's row position on the grid
        */
-      gam_selector(int grid_column, int grid_row);
+      gam_selector(int start_column, int start_row);
 
       /**
        * Checks player's input for movement and fire
