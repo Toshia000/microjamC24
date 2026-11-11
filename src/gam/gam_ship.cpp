@@ -1,4 +1,5 @@
 #include "gam_ship.h"
+#include "bn_sprite_items_ship.h"
 
 namespace gam {
 
@@ -21,15 +22,26 @@ namespace gam {
         if(horizontal) {
             for(int i = 0; i < ship_size; i++) {
                 ship_x_coords.push_back(start_x + i);
+
+                ship_sprites.push_back(bn::sprite_items::ship.create_sprite(
+                  -48 + (start_x + i) * 24,
+                  -48 + start_y * 24));
             }
             ship_y_coords.push_back(start_y);
         }
         else {
             for(int i = 0; i < ship_size; i++) {
                 ship_y_coords.push_back(start_y + i);
+
+                ship_sprites.push_back(bn::sprite_items::ship.create_sprite(
+                    -48 + start_x * 24, 
+                    -48 + (start_y + i) * 24));
             }
             ship_x_coords.push_back(start_x);
         }
+
+
+
     }
     
     /**

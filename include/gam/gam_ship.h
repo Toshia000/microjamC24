@@ -1,5 +1,6 @@
 #pragma once
 #include <bn_vector.h>
+#include "bn_sprite_ptr.h"
 
 namespace gam {
 
@@ -47,5 +48,6 @@ namespace gam {
           bool ship_horizontal;
           bn::vector<int, MAX_SIZE> ship_x_coords;
           bn::vector<int, MAX_SIZE> ship_y_coords;
+          bn::vector<bn::sprite_ptr, MAX_SIZE> ship_sprites;
     };
 }
