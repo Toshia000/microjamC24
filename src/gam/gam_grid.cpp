@@ -24,11 +24,11 @@ namespace gam {
           int row;
 
           if (horizontal) {
-              column = rng.get_int(columns() - size);
+              column = rng.get_int(columns() - size + 1);
               row = rng.get_int(rows());
           } else {              
               column = rng.get_int(columns());
-              row = rng.get_int(rows() - size);
+              row = rng.get_int(rows() - size + 1);
           }
           
           while(!occupied(column, row, size, horizontal)) {
