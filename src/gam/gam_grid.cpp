@@ -19,12 +19,25 @@ namespace gam {
        */
       void gam_grid::new_ship(int size, bn::random& rng) {
         if (_ships.size() < MAX_SHIPS) {
+          bool horizontal = rng.get_bool();
+          int column;
+          int row;
+
+          if (horizontal) {
+              column = rng.get_int(columns() - size);
+              row = rng.get_int(rows());
+          } else {              
+              column = rng.get_int(columns());
+              row = rng.get_int(rows() - size);
+          }
+          
           _ships.push_back(
             gam::gam_ship(size,
-            rng.get_bool(),
-            rng.get_int(columns()),
-            rng.get_int(rows()))
-          );
+            horizontal,
+            column,
+            row
+          ));
+
         }
       }
 
