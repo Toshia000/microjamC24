@@ -31,6 +31,18 @@ namespace gam {
               row = rng.get_int(rows() - size);
           }
           
+          while(!occupied(column, row, size, horizontal)) {
+            horizontal = rng.get_bool();
+
+            if (horizontal) {
+                column = rng.get_int(columns() - size);
+                row = rng.get_int(rows());
+            } else {              
+                column = rng.get_int(columns());
+                row = rng.get_int(rows() - size);
+            }
+          }
+
           _ships.push_back(
             gam::gam_ship(size,
             horizontal,
@@ -75,4 +87,40 @@ namespace gam {
           ship.try_to_hit(column, row);
         }
       }
+
+      /**
+       * @param first_column starting column for new ship
+       * @param first_row starting row for new ship
+       * @param size size of new ship
+       * @param horizontal orientation of new ship
+       * @return whether any ship occupies specified grid areas
+       */
+      bool gam_grid::occupied(int first_column, int first_row, int size, bool horizonal) {
+        for (gam_ship& other_ship : _ships) {
+          if (horizonal) {
+            for (int i = first_column; i < first_column + size; i++) {
+              for (int x : other_ship.x_coords()) {
+                for (int y : other_ship.y_coords()) {
+                  if (i == x && first_row == y) {
+                    return false;
+                  }
+                }
+              }
+            }
+          } else {
+            for (int j = first_row; j < first_row + size; j++) {
+              for (int x : other_ship.x_coords()) {
+                for (int y : other_ship.y_coords()) {
+                  if (j == y && first_column == x) {
+                    return false;
+                  }
+                }
+              }
+            }
+          }
+        }
+
+        return true;
+      }
+
     }
