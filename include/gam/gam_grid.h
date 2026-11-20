@@ -44,6 +44,7 @@ namespace gam {
       int _grid_columns;
       int _grid_rows;
       bn::vector<gam::gam_ship, MAX_SHIPS> _ships;
+      static constexpr int _placement_attempt = 1000;
 
       /**
        * @param first_column starting column for new ship

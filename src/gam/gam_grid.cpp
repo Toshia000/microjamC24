@@ -17,40 +17,39 @@ namespace gam {
        * 
        * @param size number of grid areas ship occupies
        */
-      void gam_grid::new_ship(int size, bn::random& rng) {
-        if (_ships.size() < MAX_SHIPS) {
-          bool horizontal = rng.get_bool();
-          int column;
-          int row;
-
-          if (horizontal) {
-              column = rng.get_int(columns() - size + 1);
-              row = rng.get_int(rows());
-          } else {              
-              column = rng.get_int(columns());
-              row = rng.get_int(rows() - size + 1);
-          }
-          
-          while(!occupied(column, row, size, horizontal)) {
-            horizontal = rng.get_bool();
-
-            if (horizontal) {
-                column = rng.get_int(columns() - size);
-                row = rng.get_int(rows());
-            } else {              
-                column = rng.get_int(columns());
-                row = rng.get_int(rows() - size);
-            }
+      void gam_grid::new_ship(int size, bn::random& rng)
+      {
+          // Catch unsupported ship sizes or a full board of ships
+          if (_ships.size() >= MAX_SHIPS || size < 1 ||
+              size > MAX_SIZE ||
+              size > _grid_columns ||
+              size > _grid_rows)
+          {
+              return;
           }
 
-          _ships.push_back(
-            gam::gam_ship(size,
-            horizontal,
-            column,
-            row
-          ));
+          for (int attempt = 0; attempt < _placement_attempt; attempt++)
+          {
+              bool horizontal = rng.get_bool();
+              int column;
+              int row;
 
-        }
+              if (horizontal)
+              {
+                  column = rng.get_int(_grid_columns - size + 1);
+                  row = rng.get_int(_grid_rows);
+              }
+              else
+              {
+                  column = rng.get_int(_grid_columns);
+                  row = rng.get_int(_grid_rows - size + 1);
+              }
+              if (occupied(column, row, size, horizontal))
+              {
+                  _ships.push_back(gam_ship(size, horizontal, column, row));
+                  return;
+              }
+          }
       }
 
       /**
