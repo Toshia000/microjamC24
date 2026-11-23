@@ -104,13 +104,14 @@ namespace gam {
             }
 
             if(column == filled_column && row == filled_row) { // If the ship is hit ..
+                // Ship is hit and is now sunk
                 _ship_hit = true;
 
-                for (bn::sprite_ptr& sprite : _ship_sprites) {
-                    sprite.set_visible(true); // Show the current sprite when it has been hit
-                }
+                // Start the animation process at the flash frame
+                _frames_since_hit = 0;
+                _show_ship_frame(_flash_sprite);
 
-                return true; // Ship was hit so return true
+                return true; 
             }
         }
 
@@ -146,6 +147,42 @@ namespace gam {
             else {
                 _ship_sprites[i].set_visible(false);
             }
+        }
+    }
+
+    void gam_ship::_show_ship_frame(int frame_index) {
+        for (bn::sprite_ptr& sprite : _ship_sprites) {
+            // Change the frame that is visible
+            sprite.set_tiles(bn::sprite_items::gam_ship.tiles_item(), frame_index);
+            sprite.set_visible(true);
+        }
+    }
+
+    bool gam_ship::animation_is_running() const {
+        // Animation will only run after a ship is hit and will stop once 8 frames have passed
+        if (_ship_hit && _frames_since_hit < _frames_per_animation * 3) { // * 3 because there is 3 animations to get through
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+
+    void gam_ship::update_animation() {
+        // Do not advance the animations while it is unsunk
+        if (!animation_is_running()) {
+            return;
+        }
+
+        _frames_since_hit++;
+
+        if (_frames_since_hit == _frames_per_animation) {
+            // Flash should show first then switch to fire after 8 frames
+            _show_ship_frame(_fire_sprite);
+        }
+        else if (_frames_since_hit == _frames_per_animation * 2) {
+            // Switch to wrecked ship image which will stay visible
+            _show_ship_frame(_wreck_sprite);
         }
     }
 }

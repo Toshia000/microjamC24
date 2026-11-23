@@ -128,4 +128,21 @@ namespace gam {
           ship.update_visibility(selected_column, selected_row);
         }
       }
+
+      void gam_grid::update_animations() {
+        for (gam_ship& ship : _ships) {
+          // Update the ships stored on the grid
+          ship.update_animation();
+        }
+      }
+
+      bool gam_grid::animation_is_running() const {
+        for (const gam_ship& ship : _ships) {
+          // If even one ship is still in the animation process return true
+          if (ship.animation_is_running()) {
+            return true;
+          }
+        }
+        return false;
+      }
     }

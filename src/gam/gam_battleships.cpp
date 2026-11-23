@@ -80,6 +80,9 @@ namespace gam {
    */
   mj::game_result gam_battleships::play([[maybe_unused]] const mj::game_data& data)
   {
+
+      _game_grid.update_animations();
+
       _game_selector.update(_game_grid.columns(), _game_grid.rows());
 
       if(bn::keypad::a_pressed()) {
@@ -89,7 +92,9 @@ namespace gam {
       // Show only the currently selected cell and all cells of sunk ships
       _game_grid.update_visibility(_game_selector.column(), _game_selector.row());
 
-      mj::game_result result(victory(), false);
+      bool is_finished = victory() && !_game_grid.animation_is_running(); 
+
+      mj::game_result result(is_finished, false);
       return result;
   }
 

@@ -44,6 +44,12 @@ namespace gam {
 
       void fire(int column, int row);
 
+      // Move the animation forward
+      void update_animations();
+
+      // Store if any ship is actively in the animation process
+      bool animation_is_running() const;
+
     private:
       int _grid_columns;
       int _grid_rows;

@@ -52,6 +52,12 @@ namespace gam {
             */
             bn::vector<int, MAX_SIZE> y_coords();
 
+            // Move the animation forward by one frame
+            void update_animation();
+
+            // Store whether the animation is running/playing
+            bool animation_is_running() const;
+
         private:
           int _ship_size;
           bool _ship_horizontal;
@@ -59,5 +65,18 @@ namespace gam {
           bn::vector<int, MAX_SIZE> _ship_x_coords;
           bn::vector<int, MAX_SIZE> _ship_y_coords;
           bn::vector<bn::sprite_ptr, MAX_SIZE> _ship_sprites;
+          
+          static constexpr int _flash_sprite = 1;
+          static constexpr int _fire_sprite = 2;
+          static constexpr int _wreck_sprite = 3;
+
+          // Hold each animation for 8 frames
+          static constexpr int _frames_per_animation = 8;
+
+          // Frames since this ship was hit
+          int _frames_since_hit = 0;
+
+          // Show one animation frame on each part of the ship
+          void _show_ship_frame(int frame_index);
     };
 }
