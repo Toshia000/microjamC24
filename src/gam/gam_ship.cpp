@@ -39,7 +39,11 @@ namespace gam {
             _ship_x_coords.push_back(start_x);
         }
 
-
+        // Start every square hidden so the board does not reveal ship locations.
+        for (bn::sprite_ptr& sprite : _ship_sprites)
+        {
+            sprite.set_visible(false);
+        }
 
     }
     
@@ -103,7 +107,7 @@ namespace gam {
                 _ship_hit = true;
 
                 for (bn::sprite_ptr& sprite : _ship_sprites) {
-                    sprite.set_visible(false); // Hides the current square
+                    sprite.set_visible(true); // Show the current sprite when it has been hit
                 }
 
                 return true; // Ship was hit so return true
@@ -111,5 +115,37 @@ namespace gam {
         }
 
         return false; // Missed so return false
+    }
+
+    void gam_ship::update_visibility(int selected_column, int selected_row) {
+        for (int i = 0; i < _ship_size; i++) {
+            int ship_cell_column;
+            int ship_cell_row;
+        
+            if(_ship_horizontal) {
+                // Horizontal cells share a row and have different columns
+                ship_cell_column = _ship_x_coords[i];
+                ship_cell_row = _ship_y_coords[0];
+            }
+            else {
+                // Vertical segments share a column and have different rows
+                ship_cell_column = _ship_x_coords[0];
+                ship_cell_row = _ship_y_coords[i];
+            }
+            
+            bool isSelected = false;
+            // Select this cell only when the column and row match the position of a ship
+            if (ship_cell_column == selected_column && ship_cell_row == selected_row) {
+                isSelected = true;
+            }
+
+            // Sunk ships always stay visible. Unsunk ships need to be selected to become visible
+            if (_ship_hit || isSelected) {
+                _ship_sprites[i].set_visible(true);
+            }
+            else {
+                _ship_sprites[i].set_visible(false);
+            }
+        }
     }
 }

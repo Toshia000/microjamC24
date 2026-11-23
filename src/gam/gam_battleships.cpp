@@ -86,6 +86,9 @@ namespace gam {
         _game_grid.fire(_game_selector.column(), _game_selector.row());
       }
 
+      // Show only the currently selected cell and all cells of sunk ships
+      _game_grid.update_visibility(_game_selector.column(), _game_selector.row());
+
       mj::game_result result(victory(), false);
       return result;
   }

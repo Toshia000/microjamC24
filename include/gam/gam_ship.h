@@ -19,6 +19,13 @@ namespace gam {
             gam_ship(int size, bool horizontal, int start_x, int start_y);
 
             /**
+             * Reveal only the selected square of an unsunk ship. Sunk ships are always visible
+             * @param selected_column column currently selected by the player
+             * @param selected_row row currently selected by the player
+            */
+            void update_visibility(int selected_column, int selected_row);
+
+            /**
              * Returns true if this ship is sunk/hit
             */
             bool is_hit() const;

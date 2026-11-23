@@ -122,4 +122,10 @@ namespace gam {
         return true;
       }
 
+      void gam_grid::update_visibility(int selected_column, int selected_row) {
+        // Update the stored ships (The grid owns the ships)
+        for (gam_ship& ship: _ships) {
+          ship.update_visibility(selected_column, selected_row);
+        }
+      }
     }

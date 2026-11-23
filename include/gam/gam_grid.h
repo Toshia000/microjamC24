@@ -24,6 +24,10 @@ namespace gam {
        */
       void new_ship(int size, bn::random& rng);
 
+      // Tell every ship which cell the player is selecting. So each ship knows which cells to show
+      void update_visibility(int selected_column, int selected_row);
+
+
       /**
        * @return number of ships that are not sunk
        */
