@@ -30,26 +30,29 @@ namespace gam {
               column = rng.get_int(columns());
               row = rng.get_int(rows() - size + 1);
           }
-          
-          while(!occupied(column, row, size, horizontal)) {
-            horizontal = rng.get_bool();
 
-            if (horizontal) {
-                column = rng.get_int(columns() - size);
-                row = rng.get_int(rows());
-            } else {              
-                column = rng.get_int(columns());
-                row = rng.get_int(rows() - size);
+          /* 
+           * Find a free space for a new ship in limited amount of tries.
+           * If it there is not enough space for creating new ship,
+           * game will not enter infinite loop.
+           */
+          for (int i = 0; i < 1000; i++) {
+            if (!occupied(column, row, size, horizontal)) {
+              _ships.push_back(gam::gam_ship(size, horizontal, column, row));
+              
+              return;
+            } else {
+              horizontal = rng.get_bool();
+
+              if (horizontal) {
+                  column = rng.get_int(columns() - size + 1);
+                  row = rng.get_int(rows());
+              } else {              
+                  column = rng.get_int(columns());
+                  row = rng.get_int(rows() - size + 1);
+              }
             }
           }
-
-          _ships.push_back(
-            gam::gam_ship(size,
-            horizontal,
-            column,
-            row
-          ));
-
         }
       }
 
@@ -102,7 +105,7 @@ namespace gam {
               for (int x : other_ship.x_coords()) {
                 for (int y : other_ship.y_coords()) {
                   if (i == x && first_row == y) {
-                    return false;
+                    return true;
                   }
                 }
               }
@@ -112,7 +115,7 @@ namespace gam {
               for (int x : other_ship.x_coords()) {
                 for (int y : other_ship.y_coords()) {
                   if (j == y && first_column == x) {
-                    return false;
+                    return true;
                   }
                 }
               }
@@ -120,7 +123,7 @@ namespace gam {
           }
         }
 
-        return true;
+        return false;
       }
 
     }
